@@ -53,9 +53,9 @@ spec:
         - containerPort: 8080
         env:
         - name: PORT
-            value: "8080"
+          value: "8080"
         - name: DISABLE_PROFILER
-            value: "1"
+          value: "1"
         readinessProbe:
           periodSeconds: 5
           grpc:
@@ -72,9 +72,10 @@ spec:
             cpu: 200m
             memory: 128Mi
 strategy: 
-  canaryservice: emailservice-canary
-  stableService: emailservice
-   steps:
+  canary:
+    canaryservice: emailservice-canary
+    stableService: emailservice
+    steps:
       - setWeight: 25
       - pause: {}
       - setWeight: 50
@@ -138,19 +139,19 @@ spec:
               port: 5050
           env:
           - name: PORT
-              value: "5050"
+            value: "5050"
           - name: PRODUCT_CATALOG_SERVICE_ADDR
-              value: "productcatalogservice:3550"
+            value: "productcatalogservice:3550"
           - name: SHIPPING_SERVICE_ADDR
-              value: "shippingservice:50051"
+            value: "shippingservice:50051"
           - name: PAYMENT_SERVICE_ADDR
-              value: "paymentservice:50051"
+            value: "paymentservice:50051"
           - name: EMAIL_SERVICE_ADDR
-              value: "emailservice:5000"
+            value: "emailservice:5000"
           - name: CURRENCY_SERVICE_ADDR
-              value: "currencyservice:7000"
+            value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR
-              value: "cartservice:7070"
+            value: "cartservice:7070"
           resources:
             requests:
               cpu: 100m
@@ -158,10 +159,11 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
-strategy: 
-  canaryservice: checkoutservice-canary
-  stableService: checkoutservice
-   steps:
+strategy:
+  canary:
+    canaryservice: checkoutservice-canary
+    stableService: checkoutservice
+    steps:
       - setWeight: 25
       - pause: {}
       - setWeight: 50
@@ -225,11 +227,11 @@ spec:
             port: 8080
         env:
         - name: PORT
-            value: "8080"
+          value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
-            value: "productcatalogservice:3550"
+          value: "productcatalogservice:3550"
         - name: DISABLE_PROFILER
-            value: "1"
+          value: "1"
         resources:
           requests:
             cpu: 100m
@@ -237,10 +239,11 @@ spec:
           limits:
             cpu: 200m
             memory: 450Mi
-strategy: 
-  canaryservice: recommendationservice-canary
-  stableService: recommendationservice
-   steps:
+strategy:
+  canary:
+    canaryservice: recommendationservice-canary
+    stableService: recommendationservice
+    steps:
       - setWeight: 25
       - pause: {}
       - setWeight: 50
@@ -302,7 +305,7 @@ spec:
               port: 8080
               httpHeaders:
               - name: "Cookie"
-                  value: "shop_session-id=x-readiness-probe"
+                value: "shop_session-id=x-readiness-probe"
           livenessProbe:
             initialDelaySeconds: 10
             httpGet:
@@ -310,30 +313,30 @@ spec:
               port: 8080
               httpHeaders:
               - name: "Cookie"
-                  value: "shop_session-id=x-liveness-probe"
+                value: "shop_session-id=x-liveness-probe"
           env:
           - name: PORT
-              value: "8080"
+            value: "8080"
           - name: PRODUCT_CATALOG_SERVICE_ADDR
-              value: "productcatalogservice:3550"
+            value: "productcatalogservice:3550"
           - name: CURRENCY_SERVICE_ADDR
-              value: "currencyservice:7000"
+            value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR
-              value: "cartservice:7070"
+            value: "cartservice:7070"
           - name: RECOMMENDATION_SERVICE_ADDR
-              value: "recommendationservice:8080"
+            value: "recommendationservice:8080"
           - name: SHIPPING_SERVICE_ADDR
-              value: "shippingservice:50051"
+            value: "shippingservice:50051"
           - name: CHECKOUT_SERVICE_ADDR
-              value: "checkoutservice:5050"
+            value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
-              value: "adservice:9555"
+            value: "adservice:9555"
           # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp
           # - name: ENV_PLATFORM
           #   value: "aws"
           - name: ENABLE_PROFILER
-              value: "0"
+            value: "0"
           # - name: CYMBAL_BRANDING
           #   value: "true"
           # - name: FRONTEND_MESSAGE
@@ -350,15 +353,16 @@ spec:
               memory: 128Mi
 
 strategy: 
-  canaryservice: frontend-canary
-  stableService: frontend
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  canary:
+    canaryservice: frontend-canary
+    stableService: frontend
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -438,15 +442,16 @@ spec:
             cpu: 200m
             memory: 128Mi
 strategy: 
-  canaryservice: paymentservice-canary
-  stableService: paymentservice
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  canary:
+    canaryservice: paymentservice-canary
+    stableService: paymentservice
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -513,15 +518,16 @@ spec:
             cpu: 200m
             memory: 128Mi
 strategy: 
-  canaryservice: productcatalogservice-canary
-  stableService: productcatalogservice
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  canary:
+    canaryservice: productcatalogservice-canary
+    stableService: productcatalogservice
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -588,15 +594,16 @@ spec:
           grpc:
             port: 7070
 strategy: 
-  canaryservice: cartservice-canary
-  stableService: cartservice
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  canary:
+    canaryservice: cartservice-canary
+    stableService: cartservice
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -620,7 +627,7 @@ spec:
   selector:
     matchLabels:
       app: loadgenerator
-  replicas: 1
+  #replicas: 1
   template:
     metadata:
       labels:
@@ -682,15 +689,16 @@ spec:
             cpu: 500m
             memory: 512Mi
 strategy: 
-  canaryservice: loadgenerator-canary
-  stableService: loadgenerator
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  canary:
+    canaryservice: loadgenerator-canary
+    stableService: loadgenerator
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
@@ -744,16 +752,17 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-strategy: 
-  canaryservice: currencyservice-canary
-  stableService: currencyservice
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+strategy:
+  canary:
+    canaryservice: currencyservice-canary
+    stableService: currencyservice
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -820,9 +829,10 @@ spec:
             cpu: 200m
             memory: 128Mi
 strategy: 
-  canaryservice: shippingservice-canary
-  stableService: shippingservice
-   steps:
+  canary:
+    canaryservice: shippingservice-canary
+    stableService: shippingservice
+    steps:
       - setWeight: 25
       - pause: {}
       - setWeight: 50
@@ -962,15 +972,16 @@ spec:
           grpc:
             port: 9555
 strategy: 
-  canaryservice: adservice-canary
-  stableService: adservice
-   steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  canary:
+    canaryservice: adservice-canary
+    stableService: adservice
+    steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
