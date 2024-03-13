@@ -18,11 +18,12 @@
 
 # [START gke_release_kubernetes_manifests_microservices_demo]
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: emailservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: emailservice
@@ -47,7 +48,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/emailservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/emailservice:v0.8.1
         ports:
         - containerPort: 8080
         env:
@@ -70,6 +71,19 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+strategy: 
+  canaryservice: emailservice-canary
+  stableService: emailservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
+      
+
+  
 ---
 apiVersion: v1
 kind: Service
@@ -84,11 +98,12 @@ spec:
     port: 5000
     targetPort: 8080
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: checkoutservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: checkoutservice
@@ -112,7 +127,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.9.0
+          image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.8.1
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -143,6 +158,16 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
+strategy: 
+  canaryservice: checkoutservice-canary
+  stableService: checkoutservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -157,11 +182,12 @@ spec:
     port: 5050
     targetPort: 5050
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: recommendationservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: recommendationservice
@@ -186,7 +212,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.8.1
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -211,6 +237,16 @@ spec:
           limits:
             cpu: 200m
             memory: 450Mi
+strategy: 
+  canaryservice: recommendationservice-canary
+  stableService: recommendationservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -225,11 +261,12 @@ spec:
     port: 8080
     targetPort: 8080
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: frontend
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: frontend
@@ -255,7 +292,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: gcr.io/google-samples/microservices-demo/frontend:v0.9.0
+          image: gcr.io/google-samples/microservices-demo/frontend:v0.8.1
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -311,6 +348,17 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
+
+strategy: 
+  canaryservice: frontend-canary
+  stableService: frontend
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -338,11 +386,12 @@ spec:
     port: 80
     targetPort: 8080
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: paymentservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: paymentservice
@@ -367,7 +416,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.8.1
         ports:
         - containerPort: 50051
         env:
@@ -388,6 +437,16 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+strategy: 
+  canaryservice: paymentservice-canary
+  stableService: paymentservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -402,11 +461,12 @@ spec:
     port: 50051
     targetPort: 50051
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: productcatalogservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: productcatalogservice
@@ -431,7 +491,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.8.1
         ports:
         - containerPort: 3550
         env:
@@ -452,6 +512,16 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+strategy: 
+  canaryservice: productcatalogservice-canary
+  stableService: productcatalogservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -466,8 +536,8 @@ spec:
     port: 3550
     targetPort: 3550
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: cartservice
 spec:
@@ -495,7 +565,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/cartservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/cartservice:v0.8.1
         ports:
         - containerPort: 7070
         env:
@@ -517,6 +587,16 @@ spec:
           periodSeconds: 10
           grpc:
             port: 7070
+strategy: 
+  canaryservice: cartservice-canary
+  stableService: cartservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -531,11 +611,12 @@ spec:
     port: 7070
     targetPort: 7070
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: loadgenerator
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: loadgenerator
@@ -587,7 +668,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.8.1
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -600,12 +681,23 @@ spec:
           limits:
             cpu: 500m
             memory: 512Mi
+strategy: 
+  canaryservice: loadgenerator-canary
+  stableService: loadgenerator
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: currencyservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: currencyservice
@@ -630,7 +722,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.8.1
         ports:
         - name: grpc
           containerPort: 7000
@@ -652,6 +744,16 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+strategy: 
+  canaryservice: currencyservice-canary
+  stableService: currencyservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -666,11 +768,12 @@ spec:
     port: 7000
     targetPort: 7000
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: shippingservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: shippingservice
@@ -694,7 +797,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.8.1
         ports:
         - containerPort: 50051
         env:
@@ -716,6 +819,16 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+strategy: 
+  canaryservice: shippingservice-canary
+  stableService: shippingservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -795,11 +908,12 @@ spec:
     port: 6379
     targetPort: 6379
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: adservice
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: adservice
@@ -824,7 +938,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.9.0
+        image: gcr.io/google-samples/microservices-demo/adservice:v0.8.1
         ports:
         - containerPort: 9555
         env:
@@ -847,6 +961,16 @@ spec:
           periodSeconds: 15
           grpc:
             port: 9555
+strategy: 
+  canaryservice: adservice-canary
+  stableService: adservice
+   steps:
+      - setWeight: 25
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 50}
+      - setWeight: 75
+      - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
