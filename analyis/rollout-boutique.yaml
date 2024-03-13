@@ -33,7 +33,7 @@ spec:
         app: emailservice
     spec:
       serviceAccountName: default
-      terminationGracePeriodSeconds: 5
+      terminationGracePeriodSeconds: 5s
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
