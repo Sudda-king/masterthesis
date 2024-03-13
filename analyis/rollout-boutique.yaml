@@ -74,7 +74,7 @@ spec:
             memory: 128Mi
   strategy: 
     canary:
-      canaryservice: emailservice-canary
+      canaryService: emailservice-canary
       stableService: emailservice
       steps:
         - setWeight: 25
