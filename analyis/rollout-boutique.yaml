@@ -73,7 +73,7 @@ spec:
             memory: 128Mi
   strategy: 
     canary:
-      canaryservice: emailservice-canary
+      canaryService: emailservice-canary
       stableService: emailservice
       steps:
         - setWeight: 25
@@ -161,7 +161,7 @@ spec:
               memory: 128Mi
   strategy:
     canary:
-      canaryservice: checkoutservice-canary
+      canaryService: checkoutservice-canary
       stableService: checkoutservice
       steps:
         - setWeight: 25
@@ -241,7 +241,7 @@ spec:
             memory: 450Mi
   strategy:
     canary:
-      canaryservice: recommendationservice-canary
+      canaryService: recommendationservice-canary
       stableService: recommendationservice
       steps:
         - setWeight: 25
@@ -354,7 +354,7 @@ spec:
 
   strategy: 
     canary:
-      canaryservice: frontend-canary
+      canaryService: frontend-canary
       stableService: frontend
       steps:
           - setWeight: 25
@@ -443,7 +443,7 @@ spec:
             memory: 128Mi
   strategy: 
     canary:
-      canaryservice: paymentservice-canary
+      canaryService: paymentservice-canary
       stableService: paymentservice
       steps:
           - setWeight: 25
@@ -519,7 +519,7 @@ spec:
             memory: 128Mi
   strategy: 
     canary:
-      canaryservice: productcatalogservice-canary
+      canaryService: productcatalogservice-canary
       stableService: productcatalogservice
       steps:
           - setWeight: 25
@@ -595,7 +595,7 @@ spec:
             port: 7070
   strategy: 
     canary:
-      canaryservice: cartservice-canary
+      canaryService: cartservice-canary
       stableService: cartservice
       steps:
           - setWeight: 25
@@ -690,7 +690,7 @@ spec:
             memory: 512Mi
   strategy: 
     canary:
-      canaryservice: loadgenerator-canary
+      canaryService: loadgenerator-canary
       stableService: loadgenerator
       steps:
           - setWeight: 25
@@ -754,7 +754,7 @@ spec:
             memory: 128Mi
   strategy:
     canary:
-      canaryservice: currencyservice-canary
+      canaryService: currencyservice-canary
       stableService: currencyservice
       steps:
           - setWeight: 25
@@ -830,7 +830,7 @@ spec:
             memory: 128Mi
   strategy: 
     canary:
-      canaryservice: shippingservice-canary
+      canaryService: shippingservice-canary
       stableService: shippingservice
       steps:
         - setWeight: 25
@@ -973,7 +973,7 @@ spec:
             port: 9555
   strategy: 
     canary:
-      canaryservice: adservice-canary
+      canaryService: adservice-canary
       stableService: adservice
       steps:
           - setWeight: 25
