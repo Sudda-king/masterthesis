@@ -71,17 +71,17 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-strategy: 
-  canary:
-    canaryservice: emailservice-canary
-    stableService: emailservice
-    steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: emailservice-canary
+      stableService: emailservice
+      steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
       
 
   
@@ -159,17 +159,17 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
-strategy:
-  canary:
-    canaryservice: checkoutservice-canary
-    stableService: checkoutservice
-    steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  strategy:
+    canary:
+      canaryservice: checkoutservice-canary
+      stableService: checkoutservice
+      steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -239,17 +239,17 @@ spec:
           limits:
             cpu: 200m
             memory: 450Mi
-strategy:
-  canary:
-    canaryservice: recommendationservice-canary
-    stableService: recommendationservice
-    steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  strategy:
+    canary:
+      canaryservice: recommendationservice-canary
+      stableService: recommendationservice
+      steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -352,17 +352,17 @@ spec:
               cpu: 200m
               memory: 128Mi
 
-strategy: 
-  canary:
-    canaryservice: frontend-canary
-    stableService: frontend
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: frontend-canary
+      stableService: frontend
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -441,17 +441,17 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-strategy: 
-  canary:
-    canaryservice: paymentservice-canary
-    stableService: paymentservice
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: paymentservice-canary
+      stableService: paymentservice
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -517,17 +517,17 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-strategy: 
-  canary:
-    canaryservice: productcatalogservice-canary
-    stableService: productcatalogservice
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: productcatalogservice-canary
+      stableService: productcatalogservice
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -593,17 +593,17 @@ spec:
           periodSeconds: 10
           grpc:
             port: 7070
-strategy: 
-  canary:
-    canaryservice: cartservice-canary
-    stableService: cartservice
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: cartservice-canary
+      stableService: cartservice
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -688,17 +688,17 @@ spec:
           limits:
             cpu: 500m
             memory: 512Mi
-strategy: 
-  canary:
-    canaryservice: loadgenerator-canary
-    stableService: loadgenerator
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: loadgenerator-canary
+      stableService: loadgenerator
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
@@ -752,17 +752,17 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-strategy:
-  canary:
-    canaryservice: currencyservice-canary
-    stableService: currencyservice
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy:
+    canary:
+      canaryservice: currencyservice-canary
+      stableService: currencyservice
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -828,17 +828,17 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-strategy: 
-  canary:
-    canaryservice: shippingservice-canary
-    stableService: shippingservice
-    steps:
-      - setWeight: 25
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 50}
-      - setWeight: 75
-      - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: shippingservice-canary
+      stableService: shippingservice
+      steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {duration: 50}
+        - setWeight: 75
+        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
@@ -971,17 +971,17 @@ spec:
           periodSeconds: 15
           grpc:
             port: 9555
-strategy: 
-  canary:
-    canaryservice: adservice-canary
-    stableService: adservice
-    steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {duration: 50}
-        - setWeight: 75
-        - pause: {duration: 75}
+  strategy: 
+    canary:
+      canaryservice: adservice-canary
+      stableService: adservice
+      steps:
+          - setWeight: 25
+          - pause: {}
+          - setWeight: 50
+          - pause: {duration: 50}
+          - setWeight: 75
+          - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
