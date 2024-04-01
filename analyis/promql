@@ -1,0 +1,16 @@
+Traffic
+
+sum(rate(istio_requests_total{app="emailservice"}[5m]))
+
+
+Latency
+Will check 95 % of the requests and their latency in ms
+histogram_quantile(0.95, sum(irate(istio_request_duration_milliseconds_bucket{app="emailservice", response_code=~"2.."}[5m])) by (le))
+
+
+Saturation 
+Cpu usage 
+
+sum(rate(container_cpu_usage_seconds_total{namespace="default", pod="emailservice-7897b594-4r4wj"}[1m])) 
+/ 
+(sum(rate(container_cpu_usage_seconds_total{namespace="default"}[1m]))*100)
