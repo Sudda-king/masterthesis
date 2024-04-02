@@ -63,7 +63,7 @@ spec:
         address: http://10.152.183.211:9090
         query:
           histogram_quantile(
-            0.95, sum(irate(istio_request_duration_milliseconds_bucket{reporter="source",destination_service=~"{{args.service-name}}", response_code=~"5.."}[5m])) by (le))
+            0.95, sum(irate(istio_request_duration_milliseconds_bucket{reporter="source",destination_service=~"{{args.service-name}}", response_code=~"2.."}[5m])) by (le))
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
