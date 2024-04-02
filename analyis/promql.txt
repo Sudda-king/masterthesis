@@ -7,6 +7,8 @@ Latency
 Will check 95 % of the requests and their latency in ms
 histogram_quantile(0.95, sum(irate(istio_request_duration_milliseconds_bucket{app="emailservice", response_code=~"2.."}[5m])) by (le))
 
+500s:-|-
+histogram_quantile(0.95, sum(irate(istio_request_duration_milliseconds_bucket{app="emailservice", response_code=~"2.."}[5m])) by (le))
 
 Saturation 
 Cpu usage 
