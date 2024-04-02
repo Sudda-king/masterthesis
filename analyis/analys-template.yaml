@@ -46,4 +46,15 @@ spec:
           histogram_quantile(
             0.95, sum(irate(istio_request_duration_milliseconds_bucket{reporter="source",destination_service=~"{{args.service-name}}", response_code=~"5.."}[5m])) by (le))
 
-  - name: pod-saturation
+  - name: pod-saturation 
+    interval: 10s
+    successCondition: result[0] <= 0.001
+    failureCondition: result[0] > 0.001
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://10.152.183.211:9090
+        query:
+          sum(rate(container_cpu_usage_seconds_total{namespace="default", pod=~"emailservice-.*"}[1m])) 
+          / 
+          (sum(rate(container_cpu_usage_seconds_total{namespace="default"}[1m]))*100)
