@@ -23,6 +23,16 @@ spec:
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[5m]
           ))
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: requests-traffic
+spec:
+  args:
+  - name: service-name
+  metrics:
   - name: requests-traffic
     interval: 10s
     successCondition: result[0] >= 0.95
@@ -33,7 +43,16 @@ spec:
         address: http://10.152.183.211:9090
         query:
           sum(rate(istio_requests_total{reporter="source", destination_service=~"{{args.service-name}}"}[1m]))
-  
+
+---
+  apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: request-latency
+spec:
+  args:
+  - name: service-name
+  metrics:
   - name: request-latency
     interval: 10s
     successCondition: result[0] <= 4.9
@@ -45,8 +64,16 @@ spec:
         query:
           histogram_quantile(
             0.95, sum(irate(istio_request_duration_milliseconds_bucket{reporter="source",destination_service=~"{{args.service-name}}", response_code=~"5.."}[5m])) by (le))
-
-  - name: pod-saturation 
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: saturation
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: saturation 
     interval: 10s
     successCondition: result[0] <= 0.001
     failureCondition: result[0] > 0.001
