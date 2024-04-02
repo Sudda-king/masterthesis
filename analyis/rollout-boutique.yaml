@@ -79,7 +79,7 @@ spec:
         - templateName: success-rate
         - templateName: requests-traffic
         - templateName: request-latency
-        - templateName: pod-saturation
+        - templateName: saturation
         startingStep: 2
         args:
         - name: service-name
