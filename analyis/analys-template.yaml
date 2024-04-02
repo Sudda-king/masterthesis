@@ -35,8 +35,8 @@ spec:
   metrics:
   - name: requests-traffic
     interval: 10s
-    successCondition: result[0] >= 0.95
-    failureCondition: result[0] < 0.95
+    successCondition: result[0] <= 0.95
+    failureCondition: result[0] > 0.95
     failureLimit: 3
     provider:
       prometheus:
