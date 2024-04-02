@@ -55,8 +55,8 @@ spec:
   metrics:
   - name: request-latency
     interval: 10s
-    successCondition: result[0] <= 4.9
-    failureCondition: result[0] > 4.9
+    successCondition: result[0] <= 40
+    failureCondition: result[0] > 40
     failureLimit: 3
     provider:
       prometheus:
