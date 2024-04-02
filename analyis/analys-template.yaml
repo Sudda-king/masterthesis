@@ -42,7 +42,7 @@ spec:
       prometheus:
         address: http://10.152.183.211:9090
         query:
-          sum(rate(istio_requests_total{reporter="source", destination_service=~"{{args.service-name}}"}[1m]))
+          sum(rate(istio_requests_total{reporter="source", destination_service=~"{{args.service-name}}"}[5m]))
 
 ---
 apiVersion: argoproj.io/v1alpha1
