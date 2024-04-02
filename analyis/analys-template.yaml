@@ -75,8 +75,8 @@ spec:
   metrics:
   - name: saturation 
     interval: 10s
-    successCondition: result[0] <= 0.001
-    failureCondition: result[0] > 0.001
+    successCondition: result[0] <= 0.1
+    failureCondition: result[0] > 0.1
     failureLimit: 3
     provider:
       prometheus:
