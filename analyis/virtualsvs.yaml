@@ -8,7 +8,11 @@ spec:
   hosts:
   - istio-rollout.dev.argoproj.io
   http:
-  - name: primary        # referenced in canary.trafficRouting.istio.virtualService.routes
+  - fault:
+      abort:
+        httpStatus: 500
+        percentage:
+          value: 100
     route:
     - destination:
         host: emailservice 
@@ -18,9 +22,5 @@ spec:
         host: emailservice
         subset: canary # referenced in canary.canaryService
       weight: 0
-  - fault:
-      abort:
-        httpStatus: 500
-        percentage:
-          value: 100
+
         
