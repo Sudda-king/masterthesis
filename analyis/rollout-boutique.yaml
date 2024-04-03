@@ -85,14 +85,18 @@ spec:
         args:
         - name: service-name
           value: canary-emailservice.default.svc.cluster.local
-      canaryService: canary-emailservice
-      stableService: emailservice
+      #canaryService: canary-emailservice
+      #stableService: emailservice
       trafficRouting:
         istio:
           virtualService:
             name: rollout-vsvc   # required
             routes:
             - primary 
+          destinationRule:
+            name: rollout-destrule
+            canarySubsetName: canary
+            stableSubsetName: stable
       steps:
         - setWeight: 25
         - pause: {}
@@ -100,19 +104,6 @@ spec:
         - pause: {}
         - setWeight: 75
         - pause: {duration: 75}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: canary-emailservice
-spec:
-  type: ClusterIP
-  selector:
-    app: emailservice
-  ports:
-  - name: grpc
-    port: 5000
-    targetPort: 8080
 ---
 apiVersion: v1
 kind: Service
