@@ -18,7 +18,7 @@ spec:
         host: emailservice
         subset: canary # referenced in canary.canaryService
       weight: 0
-    fault:  
+  - fault:
       abort:
         httpStatus: 500
         percentage:
