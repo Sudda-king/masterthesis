@@ -13,6 +13,8 @@ spec:
         httpStatus: 500
         percentage:
           value: 100
+          
+  - name: primary
     route:
     - destination:
         host: emailservice 
