@@ -11,8 +11,10 @@ spec:
   - name: primary        # referenced in canary.trafficRouting.istio.virtualService.routes
     route:
     - destination:
-        host: emailservice # referenced in canary.stableService
+        host: emailservice 
+        subset: stable # referenced in canary.stableService
       weight: 100
     - destination:
-        host: canary-emailservice # referenced in canary.canaryService
+        host: emailservice
+        subset: canary # referenced in canary.canaryService
       weight: 0
