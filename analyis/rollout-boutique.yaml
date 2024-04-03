@@ -84,7 +84,7 @@ spec:
         startingStep: 2
         args:
         - name: service-name
-          value: emailservice.default.svc.cluster.local
+          value: canary-emailservice.default.svc.cluster.local
       canaryService: canary-emailservice
       stableService: emailservice
       trafficRouting:
