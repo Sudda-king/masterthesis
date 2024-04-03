@@ -74,7 +74,7 @@ spec:
             memory: 128Mi
   strategy: 
     canary:
-      
+      dynamicStableScale: true
       analysis:
         templates:
         - templateName: success-rate
