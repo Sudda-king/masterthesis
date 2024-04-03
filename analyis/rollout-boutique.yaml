@@ -78,9 +78,9 @@ spec:
       analysis:
         templates:
         - templateName: success-rate
-        - templateName: requests-traffic
-        - templateName: request-latency
-        - templateName: saturation
+        #- templateName: requests-traffic
+        #- templateName: request-latency
+        #- templateName: saturation
         startingStep: 2
         args:
         - name: service-name
