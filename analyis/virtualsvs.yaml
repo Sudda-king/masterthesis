@@ -13,7 +13,12 @@ spec:
     - destination:
         host: emailservice 
         subset: stable # referenced in canary.stableService
-      weight: 100     
+      weight: 100
+    fault:  
+      abort:
+        httpStatus: 500
+        percentage:
+          value: 50  
     - destination:
         host: emailservice
         subset: canary # referenced in canary.canaryService
