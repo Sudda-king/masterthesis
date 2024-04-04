@@ -8,11 +8,6 @@ spec:
   hosts:
   - istio-rollout.dev.argoproj.io
   http:
-  - fault:
-      abort:
-        percentage:
-          value: 100.0
-        httpStatus: 500
   - name: primary
     route:
     - destination:
