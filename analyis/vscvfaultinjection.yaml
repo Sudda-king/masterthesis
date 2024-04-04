@@ -12,6 +12,6 @@ spec:
         percentage: 
           value: 100
   - route:
-  - destination:
-      host: emailservice 
+    - destination:
+        host: emailservice 
 
