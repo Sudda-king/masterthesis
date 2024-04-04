@@ -24,8 +24,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: frontend-destrule
-  namespace: # Namespace the application exists in
 spec:
-  host: # Service you want a destination rule for, i.e. frontend.application.svc.cluster.local
+  host: emailservice
   subsets:
   - name: frontend
