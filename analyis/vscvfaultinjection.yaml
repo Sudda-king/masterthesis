@@ -8,8 +8,10 @@ spec:
   http:  
   - fault:
       abort:
-        percent: 100
         httpStatus: 500
+        percent: 
+          value: 100
+        
   - route:
     - destination:
         host: emailservice 
