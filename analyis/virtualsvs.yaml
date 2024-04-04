@@ -7,7 +7,12 @@ spec:
   - istio-rollout-gateway
   hosts:
   - istio-rollout.dev.argoproj.io
-  http:        
+  http:
+  - fault:
+      abort:
+        percentage:
+          value: 100.0
+        httpStatus: 500
   - name: primary
     route:
     - destination:
