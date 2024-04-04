@@ -11,7 +11,7 @@ spec:
         httpStatus: 500
         percentage: 
           value: 100
-    route:
-    - destination:
-        host: emailservice 
+  - route:
+  - destination:
+      host: emailservice 
 
