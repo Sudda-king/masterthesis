@@ -1,18 +1,31 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: emailservice-fault-injection
+  name: frontend-ingress
+  namespace: # Namespace, if using examples would be just application
 spec:
   hosts:
-  - emailservice.default.svc.cluster.local
+  - frontend
   http:
-  - fault:
+  - route:
+    - destination:
+        host: emailservice
+        port:
+          number: 80
+    # Inject faults, see https://istio.io/latest/docs/tasks/traffic-management/fault-injection/
+    fault:  
       abort:
         httpStatus: 500
         percentage:
           value: 50
-    route:
-    - destination:
-        host: emailservice.default.svc.cluster.local
-        port:
-          number: 8080
+        
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: frontend-destrule
+  namespace: # Namespace the application exists in
+spec:
+  host: # Service you want a destination rule for, i.e. frontend.application.svc.cluster.local
+  subsets:
+  - name: frontend
