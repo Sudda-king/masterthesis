@@ -5,11 +5,12 @@ metadata:
 spec:
   hosts:
   - emailservice
-  http:        
-  - route:
-    - destination:
-        host: emailservice 
-    fault:
+  http:  
+  - fault:
       abort:
         percent: 100
         httpStatus: 500
+  - route:
+    - destination:
+        host: emailservice 
+
