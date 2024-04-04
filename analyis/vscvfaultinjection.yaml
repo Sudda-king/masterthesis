@@ -10,7 +10,7 @@ spec:
       abort:
         httpStatus: 500
         percentage:
-          value: 100
+          value: 50
     route:
     - destination:
         host: emailservice.default.svc.cluster.local
