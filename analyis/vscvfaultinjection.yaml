@@ -4,7 +4,7 @@ metadata:
   name: fault-vsvc
 spec:
   hosts:
-  - emailservice
+  - emailservice.default.svc.cluster.local
   http:  
   - fault:
       abort:
@@ -13,5 +13,5 @@ spec:
           value: 100
   - route:
     - destination:
-        host: emailservice 
+        host: emailservice.default.svc.cluster.local
 
