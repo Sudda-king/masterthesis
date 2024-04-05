@@ -315,12 +315,12 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
-  strategy:
+  strategy: 
     canary:
       dynamicStableScale: true
       analysis:
-        templates: 
-        -templateName: success-rate
+        templates:
+        - templateName: success-rate
         #- templateName: requests-traffic
         #- templateName: request-latency
         #- templateName: saturation
