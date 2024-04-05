@@ -315,7 +315,7 @@ spec:
 
   strategy: 
     canary:
-      dynamicStableScale: true
+      #dynamicStableScale: true
       analysis:
         templates:
         - templateName: success-rate
