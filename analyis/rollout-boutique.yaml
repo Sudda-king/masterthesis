@@ -19,7 +19,7 @@
 # [START gke_release_kubernetes_manifests_microservices_demo]
 
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: emailservice
