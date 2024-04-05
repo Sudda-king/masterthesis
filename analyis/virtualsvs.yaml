@@ -12,9 +12,9 @@ spec:
     route:
     - destination:
         host: frontend 
-        subset: stable # referenced in canary.stableService
+        #subset: stable # referenced in canary.stableService
       weight: 100 
     - destination:
-        host: frontend
-        subset: canary # referenced in canary.canaryService
+        host: canary-frontend
+        #subset: canary # referenced in canary.canaryService
       weight: 0 
