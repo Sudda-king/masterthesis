@@ -11,10 +11,10 @@ spec:
   - name: primary
     route:
     - destination:
-        host: frontend 
+        host: catalog 
         subset: stable # referenced in canary.stableService
       weight: 100 
     - destination:
-        host: frontend
+        host: catalog
         subset: canary # referenced in canary.canaryService
       weight: 0 
