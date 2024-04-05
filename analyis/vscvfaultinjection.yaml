@@ -14,7 +14,7 @@ spec:
     route:
     - destination:
         host: frontend.default.svc.cluster.local
-        subset: frontend
+        subset: canary
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
