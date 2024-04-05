@@ -1,28 +1,28 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata: 
-  name: checkoutservice-vs
+  name: productcatalogservice-vs
 spec:
   hosts:
-  - checkoutservice.default.svc.cluster.local
+  - productcatalogservice.default.svc.cluster.local
   http:
   - fault:
       abort:
         percentage:
-          value: 20.0
+          value: 100.0
         httpStatus: 500
     route:
     - destination:
-        host: checkoutservice.default.svc.cluster.local
-        subset: checkout
+        host: productcatalogservice.default.svc.cluster.local
+        subset: catalog
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata: 
-  name: checkoutservice-dr
+  name: productcatalogservice-dr
 spec:
-  host: checkoutservice.default.svc.cluster.local
+  host: productcatalogservice.default.svc.cluster.local
   subsets:
-  - name: checkout
+  - name: catalog
     labels:
-      app: checkoutservice
+      app: productcatalogservice
