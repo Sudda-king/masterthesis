@@ -226,8 +226,8 @@ spec:
     port: 8080
     targetPort: 8080
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: frontend
 spec:
@@ -312,6 +312,39 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
+
+  strategy: 
+    canary:
+      dynamicStableScale: true
+      analysis:
+        templates:
+        - templateName: success-rate
+        #- templateName: requests-traffic
+        #- templateName: request-latency
+        #- templateName: saturation
+        startingStep: 2
+        args:
+        - name: service-name
+          value: frontend.default.svc.cluster.local
+      #canaryService: canary-emailservice
+      #stableService: emailservice
+      trafficRouting:
+        istio:
+          virtualService:
+            name: rollout-vsvc   # required
+            routes:
+            - primary 
+          destinationRule:
+            name: rollout-destrule
+            canarySubsetName: canary
+            stableSubsetName: stable
+      steps:
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {}
+        - setWeight: 75
+        - pause: {duration: 75}
         
 ---
 apiVersion: v1
@@ -404,12 +437,12 @@ spec:
     port: 50051
     targetPort: 50051
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: productcatalogservice
 spec:
-  replicas: 4
+  #replicas: 4
   selector:
     matchLabels:
       app: productcatalogservice
@@ -434,7 +467,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.8.1
+        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.9.0
         ports:
         - containerPort: 3550
         env:
@@ -455,38 +488,6 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
-  strategy: 
-    canary:
-      dynamicStableScale: true
-      analysis:
-        templates:
-        - templateName: success-rate
-        #- templateName: requests-traffic
-        #- templateName: request-latency
-        #- templateName: saturation
-        startingStep: 2
-        args:
-        - name: service-name
-          value: frontend.default.svc.cluster.local
-      #canaryService: canary-emailservice
-      #stableService: emailservice
-      trafficRouting:
-        istio:
-          virtualService:
-            name: rollout-vsvc   # required
-            routes:
-            - primary 
-          destinationRule:
-            name: rollout-destrule
-            canarySubsetName: canary
-            stableSubsetName: stable
-      steps:
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {}
-        - setWeight: 75
-        - pause: {duration: 75}
 ---
 apiVersion: v1
 kind: Service
