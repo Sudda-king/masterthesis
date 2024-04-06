@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: HTTPFaultInjection
+metadata:
+  name: fault-injection
+spec:
+  # Apply fault injection to requests going to canary-frontend
+  httpFault:
+    - match:
+        destination:
+          name: canary-frontend
+      abort:
+        httpStatus: 500
+        percentage:
+          value: 0 # % of requests will be aborted with a 500 error
+
+
+
+#apiVersion: networking.istio.io/v1alpha3
+#kind: VirtualService
+#metadata: 
+#  name: canary-frontend-vs
+#spec:
+#  hosts:
+#  - canary-frontend
+#  http:
+#  - name: faultPrimary 
+#      fault:
+#        abort:
+#          percentage:
+#            value: 0.0
+#          httpStatus: 500
+#      route:
+#      - destination:
+#          host: canary-frontend
+        #subset: frontend
+#---
+#apiVersion: networking.istio.io/v1alpha3
+#kind: DestinationRule
+#metadata: 
+#  name: canary-frontend-dr
+#spec:
+#  host: canary-frontend #.default.svc.cluster.local
+#  subsets:
+#  - name: frontend
+#    labels:
+#      app: frontend
