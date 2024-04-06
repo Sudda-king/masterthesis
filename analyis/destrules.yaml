@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: rollout-destrule
 spec:
-  host: frontend.default.svc.cluster.local
+  host: frontend
   subsets:
   - name: canary   # referenced in canary.trafficRouting.istio.destinationRule.canarySubsetName
     labels:        # labels will be injected with canary rollouts-pod-template-hash value
