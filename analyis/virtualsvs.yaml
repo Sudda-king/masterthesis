@@ -3,10 +3,11 @@ kind: VirtualService
 metadata:
   name: rollout-vsvc
 spec:
-  gateways:
-  - istio-rollout-gateway
+  #gateways:
+  #- istio-rollout-gateway
   hosts:
-  - istio-rollout.dev.argoproj.io
+  #- istio-rollout.dev.argoproj.io
+  - frontend
   http:
   - name: primary
     route:
