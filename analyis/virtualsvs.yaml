@@ -10,6 +10,7 @@ spec:
   - frontend
   - canary-frontend
   http:
+  - name: primary
   - fault:
       abort:
         percentage:
@@ -19,7 +20,6 @@ spec:
     - destination:
         host: canary-frontend #.default.svc.cluster.local
         subset: frontend
-  - name: primary
     route:
     - destination:
         host: frontend 
