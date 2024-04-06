@@ -3,26 +3,14 @@ kind: VirtualService
 metadata:
   name: rollout-vsvc
 spec:
-  #gateways:
-  #- istio-rollout-gateway
   hosts:
-  #- istio-rollout.dev.argoproj.io
-  - frontend
-  - canary-frontend
+    - frontend
+    - canary-frontend
   http:
-  - name: primary
-    route:
-    - destination:
-        host: frontend 
-        #subset: stable # referenced in canary.stableService
-      weight: 100 
-    - destination:
-        host: canary-frontend
-        #subset: canary # referenced in canary.canaryService
-      weight: 0 
-      fault:
-        abort:
-          percentage:
-            value: 0.0
-          httpStatus: 500 
-
+    - route:
+        - destination:
+            host: frontend
+          weight: 100
+        - destination:
+            host: canary-frontend
+          weight: 0
