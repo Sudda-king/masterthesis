@@ -238,7 +238,6 @@ spec:
     metadata:
       labels:
         app: frontend
-        version: v1
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
