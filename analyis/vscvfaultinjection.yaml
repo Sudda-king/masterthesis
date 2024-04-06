@@ -15,15 +15,15 @@ spec:
       route:
       - destination:
           host: canary-frontend
-        subset: frontend
----
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata: 
-  name: canary-frontend-dr
-spec:
-  host: canary-frontend #.default.svc.cluster.local
-  subsets:
-  - name: frontend
-    labels:
-      app: frontend
+        #subset: frontend
+#---
+#apiVersion: networking.istio.io/v1alpha3
+#kind: DestinationRule
+#metadata: 
+#  name: canary-frontend-dr
+#spec:
+#  host: canary-frontend #.default.svc.cluster.local
+#  subsets:
+#  - name: frontend
+#    labels:
+#      app: frontend
