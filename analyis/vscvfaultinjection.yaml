@@ -1,22 +1,31 @@
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: fault-injection-vsvc
 spec:
   hosts:
-    - canary-frontend
+    - frontend
   http:
-    - fault:
-        abort:
-          httpStatus: 500
-          percentage:
-            value: 10 # 10% of requests will be aborted with a 500 error
+  - fault:
+      abort:
+        httpStatus: 500
+        percentage:
+          value: 0 # 10% of requests will be aborted with a 500 error
       route:
         - destination:
-            host: canary-frontend
-          weight: 100
-
-
+            host: frontend
+            subset: canary
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata: 
+  name: frontendInject-dr
+spec:
+  host: frontend
+  subsets:
+  - name: canary
+    labels:
+      app: frontend
 
 #apiVersion: networking.istio.io/v1alpha3
 #kind: VirtualService
