@@ -315,7 +315,7 @@ spec:
 
   strategy: 
     canary:
-      #dynamicStableScale: true
+      dynamicStableScale: true
       analysis:
         templates:
         - templateName: success-rate
@@ -325,19 +325,19 @@ spec:
         startingStep: 2
         args:
         - name: service-name
-          value: canary-frontend.default.svc.cluster.local
-      canaryService: canary-frontend
-      stableService: frontend
+          value: frontend.default.svc.cluster.local
+      #canaryService: canary-frontend
+      #stableService: frontend
       trafficRouting:
         istio:
           virtualService:
             name: rollout-vsvc   # required
             routes:
             - primary 
-          #destinationRule:
-           # name: rollout-destrule
-           # canarySubsetName: canary
-            #stableSubsetName: stable
+          destinationRule:
+            name: rollout-destrule
+            canarySubsetName: canary
+            stableSubsetName: stable
       steps:
         - setWeight: 25
         - pause: {}
@@ -347,19 +347,19 @@ spec:
         - pause: {duration: 75}
 
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: canary-frontend
-spec:
-  type: ClusterIP
-  selector:
-    app: frontend
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: canary-frontend
+#spec:
+#  type: ClusterIP
+#  selector:
+#    app: frontend
+#  ports:
+#  - name: http
+#    port: 80
+#    targetPort: 8080
 ---
 apiVersion: v1
 kind: Service
