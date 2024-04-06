@@ -328,12 +328,12 @@ spec:
           value: canary-frontend.default.svc.cluster.local
       canaryService: canary-frontend
       stableService: frontend
-      trafficRouting:
-        istio:
-          virtualService:
-            - name: rollout-vsvc   # required
-              routes:
-              - primary 
+      #trafficRouting:
+       # istio:
+        #  virtualService:
+         #   - name: rollout-vsvc   # required
+          #    routes:
+           #   - primary 
           #destinationRule:
            # name: rollout-destrule
            # canarySubsetName: canary
