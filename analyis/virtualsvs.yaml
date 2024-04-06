@@ -6,8 +6,8 @@ spec:
   gateway:
   - istio-rollout-gateway
   hosts:
-    - frontend
-    - canary-frontend
+  - frontend
+  - canary-frontend
   http:
     - route:
         - destination:
