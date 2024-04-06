@@ -7,14 +7,15 @@ spec:
   #- canary-frontend.default.svc.cluster.local
   - canary-frontend
   http:
-  - fault:
-      abort:
-        percentage:
-          value: 0.0
-        httpStatus: 500
-    route:
-    - destination:
-        host: canary-frontend #.default.svc.cluster.local
+  - name: primary 
+    - fault:
+        abort:
+          percentage:
+            value: 0.0
+          httpStatus: 500
+      route:
+      - destination:
+          host: canary-frontend #.default.svc.cluster.local
         #subset: frontend
 #---
 #apiVersion: networking.istio.io/v1alpha3
