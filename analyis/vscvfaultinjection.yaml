@@ -4,7 +4,7 @@ metadata:
   name: fault-injection-vsvc
 spec:
   hosts:
-    - frontend.local
+    - frontend
   http:
   - fault:
       abort:
@@ -21,7 +21,7 @@ kind: DestinationRule
 metadata: 
   name: frontendinject-dr
 spec:
-  host: frontend.local
+  host: frontend
   subsets:
   - name: canary
     labels:
