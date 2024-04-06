@@ -9,10 +9,11 @@ spec:
   - frontend
   - canary-frontend
   http:
-    - route:
-        - destination:
-            host: frontend
-          weight: 100
-        - destination:
-            host: canary-frontend
-          weight: 0
+  - name: primary
+    route:
+    - destination:
+        host: frontend
+      weight: 100
+    - destination:
+        host: canary-frontend
+      weight: 0
