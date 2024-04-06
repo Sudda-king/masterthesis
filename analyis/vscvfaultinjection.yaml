@@ -21,7 +21,7 @@ kind: DestinationRule
 metadata: 
   name: frontendinject-dr
 spec:
-  host: frontend
+  host: frontend.local
   subsets:
   - name: canary
     labels:
