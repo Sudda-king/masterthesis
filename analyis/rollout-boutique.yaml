@@ -331,9 +331,12 @@ spec:
       trafficRouting:
         istio:
           virtualService:
-            name: rollout-vsvc   # required
-            routes:
-            - primary 
+            - name: rollout-vsvc   # required
+              routes:
+              - primary 
+            - name: canary-frontend-vs
+              routes:
+              - faultPrimary
           #destinationRule:
            # name: rollout-destrule
            # canarySubsetName: canary
