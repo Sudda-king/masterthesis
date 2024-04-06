@@ -7,7 +7,7 @@ spec:
   - canary-frontend
   http:
   - name: faultPrimary 
-    - fault:
+      fault:
         abort:
           percentage:
             value: 0.0
