@@ -4,7 +4,8 @@ metadata:
   name: canary-frontend-vs
 spec:
   hosts:
-  - canary-frontend.default.svc.cluster.local
+  #- canary-frontend.default.svc.cluster.local
+  - canary-frontend
   http:
   - fault:
       abort:
