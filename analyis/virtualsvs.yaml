@@ -11,15 +11,6 @@ spec:
   - canary-frontend
   http:
   - name: primary
-  - fault:
-      abort:
-        percentage:
-          value: 0.0
-        httpStatus: 500
-    route:
-    - destination:
-        host: canary-frontend #.default.svc.cluster.local
-        subset: frontend
     route:
     - destination:
         host: frontend 
@@ -29,7 +20,15 @@ spec:
         host: canary-frontend
         #subset: canary # referenced in canary.canaryService
       weight: 0 
----
+  - fault:
+      abort:
+        percentage:
+          value: 0.0
+        httpStatus: 500
+    route:
+    - destination:
+        host: canary-frontend #.default.svc.cluster.local
+        subset: frontend
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
