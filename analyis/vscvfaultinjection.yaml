@@ -4,7 +4,7 @@ metadata:
   name: fault-injection-vsvc
 spec:
   hosts:
-    - frontend
+    - frontend.local
   http:
   - fault:
       abort:
