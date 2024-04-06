@@ -332,8 +332,8 @@ spec:
         istio:
           virtualService:
             name: rollout-vsvc   # required
-              routes:
-              - primary 
+            routes:
+            - primary 
           #destinationRule:
            # name: rollout-destrule
            # canarySubsetName: canary
