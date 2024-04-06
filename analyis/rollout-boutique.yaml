@@ -331,7 +331,7 @@ spec:
       trafficRouting:
         istio:
           virtualService:
-            - name: rollout-vsvc   # required
+            name: rollout-vsvc   # required
               routes:
               - primary 
           #destinationRule:
