@@ -27,9 +27,7 @@ spec:
     labels:
       app: frontend
       version: v1
-  - name: stable
-    labels:
-      app: frontend
+
 #apiVersion: networking.istio.io/v1alpha3
 #kind: VirtualService
 #metadata: 
