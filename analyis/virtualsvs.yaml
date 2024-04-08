@@ -14,11 +14,6 @@ spec:
         host: frontend
         subset: stable
       weight: 100
-  - fault:
-      abort:
-        httpStatus: 500
-        percentage:
-          value: 10 # 10% of requests will be aborted with a 500 error
     route:
     - destination:
         host: frontend
