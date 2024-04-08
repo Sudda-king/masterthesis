@@ -238,7 +238,7 @@ spec:
     metadata:
       labels:
         app: frontend
-        #version: v1
+        version: v1
       annotations:
         sidecar.istio.io/inject: "true"
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
