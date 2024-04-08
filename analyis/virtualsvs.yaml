@@ -15,11 +15,12 @@ spec:
         subset: stable
       weight: 100
     - fault:
-      abort:
-        httpStatus: 500
-        percentage:
-          value: 10 # 10% of requests will be aborted with a 500 error
-      - destination:
-          host: canary-frontend
-          subset: canary
-        weight: 0
+        abort:
+          httpStatus: 500
+          percentage:
+            value: 10 # 10% of requests will be aborted with a 500 error
+      route:
+    - destination:
+        host: canary-frontend
+        subset: canary
+      weight: 0
