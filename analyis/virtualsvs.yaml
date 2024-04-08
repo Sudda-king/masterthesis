@@ -20,6 +20,6 @@ spec:
           percentage:
             value: 10 # 10% of requests will be aborted with a 500 error
     - destination:
-        host: canary-frontend
+        host: frontend
         subset: canary
       weight: 0
