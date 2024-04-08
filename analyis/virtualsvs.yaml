@@ -19,7 +19,6 @@ spec:
           httpStatus: 500
           percentage:
             value: 10 # 10% of requests will be aborted with a 500 error
-      route:
     - destination:
         host: canary-frontend
         subset: canary
