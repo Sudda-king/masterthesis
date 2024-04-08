@@ -4,7 +4,7 @@ metadata:
   name: canary-frontend-fault-injection
 spec:
   hosts:
-    - canary-frontend.default.svc.cluster.local
+    - canary-frontend.local #.default.svc.cluster.local
   http:
   - fault:
       abort:
