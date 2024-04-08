@@ -15,6 +15,11 @@ spec:
     - destination:
         host: frontend
         subset: canary
+  - route: 
+    - destination: 
+        host: frontend
+        subset: canary
+      weight: 100
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
