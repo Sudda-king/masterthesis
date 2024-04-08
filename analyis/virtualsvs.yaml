@@ -12,11 +12,11 @@ spec:
     route:
     - destination:
         host: frontend
-        subset: stable
+        #subset: stable
       weight: 100
     - destination:
         host: canary-frontend
-        subset: canary
+        #subset: canary
       weight: 0
     #fault:
     #  abort:
