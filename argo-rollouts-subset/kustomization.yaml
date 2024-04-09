@@ -3,9 +3,9 @@ kind: Kustomization
 
 resources:
 - namespace.yaml
-- analysis.yaml
+- analysistemplate.yaml
 - gateway.yaml
-- services.yaml
+- service.yaml
 - virtualservice.yaml
 - rollout.yaml
 - destinationrule.yaml
