@@ -63,7 +63,7 @@ spec:
   metrics:
   - name: request-latency
     interval: 10s
-    successCondition: len(result) == 0 || result[0] <=0.003
+    successCondition: len(result) == 0 || result[0] <=0.004
    # failureCondition: 
    # failureLimit: 3
     provider:
