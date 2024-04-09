@@ -29,7 +29,7 @@ spec:
     canary:
       # analysis will be performed in background, while rollout is progressing through its steps
       analysis:
-        startingStep: 1   # index of step list, of when to start this analysis
+        startingStep: 2   # index of step list, of when to start this analysis
         templates:
         - templateName: istio-success-rate
         args:             # arguments allow AnalysisTemplates to be re-used
@@ -51,9 +51,9 @@ spec:
             stableSubsetName: stable  # required
       steps:
       - setWeight: 10
-      - pause: {}         # pause indefinitely
+      - pause: {}         # pause indefinitely, use promote command to move to next step. 
       - setWeight: 20
-      - pause: {duration: 20s}
+      - pause: {}
       - setWeight: 30
       - pause: {duration: 20s}
       - setWeight: 40
