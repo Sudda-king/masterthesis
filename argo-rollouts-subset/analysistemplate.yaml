@@ -14,7 +14,7 @@ spec:
     successCondition: result[0] > 0.90
     provider:
       prometheus:
-        address: http://prometheus.istio-system:9090
+        address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query: >+
           sum(irate(istio_requests_total{
             reporter="source",
@@ -44,7 +44,7 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: http://prometheus.istio-system:9090 #http://10.152.183.211:9090
+        address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
           sum(rate(istio_requests_total{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m]))
 
@@ -66,7 +66,7 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: http://prometheus.istio-system:9090 #http://10.152.183.211:9090
+        address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
           histogram_quantile(0.90, sum(irate(istio_request_duration_milliseconds_bucket{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m])) by (le)) / 1000 by (le))
 ---
@@ -86,6 +86,6 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: http://prometheus.istio-system:9090 #http://10.152.183.211:9090
+        address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
           sum(rate(container_cpu_usage_seconds_total{namespace="default", pod=~"istio-rollout-.*"}[1m])) 
