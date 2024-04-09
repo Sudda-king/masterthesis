@@ -70,7 +70,7 @@ spec:
       prometheus:
         address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
-          histogram_quantile(0.90, sum(irate(istio_request_duration_milliseconds_bucket{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m])) by (le)) / 1000 by (le))
+          histogram_quantile(0.90, sum(rate(istio_request_duration_milliseconds_bucket{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m])) by (le)) / 1000 
 ---
 #saturation
 apiVersion: argoproj.io/v1alpha1
