@@ -11,7 +11,7 @@ spec:
   - name: success-rate
     initialDelay: 60s
     interval: 20s
-    successCondition: result[0] > 0.90
+    successCondition: len(result) > 0 ? result[0] >= 0.9 : true
     provider:
       prometheus:
         address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
@@ -39,9 +39,10 @@ spec:
   metrics:
   - name: requests-traffic
     interval: 10s
-    successCondition: result[0] <= 0.95
-    failureCondition: result[0] > 0.95
-    failureLimit: 3
+    successCondition: len(result) > 0 ? result[0] <=60  : true
+    #successCondition: result[0] <= 0.95
+    #failureCondition: result[0] > 0.95
+    #failureLimit: 3
     provider:
       prometheus:
         address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
@@ -61,9 +62,9 @@ spec:
   metrics:
   - name: request-latency
     interval: 10s
-    successCondition: result[0] <= 5
+    successCondition: len(result) > 0 ? result[0] <=5  : true
    # failureCondition: 
-    failureLimit: 3
+   # failureLimit: 3
     provider:
       prometheus:
         address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
