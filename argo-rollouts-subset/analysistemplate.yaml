@@ -1,9 +1,9 @@
+#error
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
   name: istio-success-rate
 spec:
-  # this analysis template requires a service name and namespace to be supplied to the query
   args:
   - name: service
   - name: namespace
@@ -26,3 +26,66 @@ spec:
             reporter="source",
             destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[40s])
           )
+---
+#TRAFFIC
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: requests-traffic
+spec:
+  args:
+  - name: service
+  - name: namespace
+  metrics:
+  - name: requests-traffic
+    interval: 10s
+    successCondition: result[0] <= 0.95
+    failureCondition: result[0] > 0.95
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus.istio-system:9090 #http://10.152.183.211:9090
+        query:
+          sum(rate(istio_requests_total{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m]))
+
+---
+# LATENCY
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: request-latency
+spec:
+  args:
+  - name: service
+  - name: namespace
+  metrics:
+  - name: request-latency
+    interval: 10s
+    successCondition: result[0] <= 5
+   # failureCondition: 
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus.istio-system:9090 #http://10.152.183.211:9090
+        query:
+          histogram_quantile(0.90, sum(irate(istio_request_duration_milliseconds_bucket{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m])) by (le)) / 1000 by (le))
+---
+#saturation
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: saturation
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: saturation 
+    interval: 10s
+    successCondition: result[0] <= 0.1
+    failureCondition: result[0] > 0.1
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus.istio-system:9090 #http://10.152.183.211:9090
+        query:
+          sum(rate(container_cpu_usage_seconds_total{namespace="default", pod=~"istio-rollout-.*"}[1m])) 
