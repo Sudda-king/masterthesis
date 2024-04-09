@@ -32,6 +32,9 @@ spec:
         startingStep: 2   # index of step list, of when to start this analysis
         templates:
         - templateName: istio-success-rate
+        - templateName: requests-traffic
+        - templateName: request-latency
+        #- templateName: saturation
         args:             # arguments allow AnalysisTemplates to be re-used
         - name: service 
           value: istio-rollout
