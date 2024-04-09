@@ -39,10 +39,10 @@ spec:
         - name: service 
           value: istio-rollout
         - name: namespace
-          value: rollouts-demo-istio
-          #valueFrom:
-          #  fieldRef:
-          #    fieldPath: metadata.namespace
+          #value: rollouts-demo-istio
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
       trafficRouting:
         istio:
           virtualService:
