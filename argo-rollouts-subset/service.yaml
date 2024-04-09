@@ -8,6 +8,7 @@ spec:
     targetPort: http
     protocol: TCP
     name: http
+    nodePort: 30547
   selector:
     app: istio-rollout
   type: NodePort
