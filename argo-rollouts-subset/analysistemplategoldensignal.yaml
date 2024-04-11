@@ -2,13 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: istio-success-rate
+  name: golden-error
 spec:
   args:
   - name: service
   - name: namespace
   metrics:
-  - name: success-rate
+  - name: golden-error
     initialDelay: 60s
     interval: 20s
     successCondition: len(result) == 0 || result[0] >= 0.9 
@@ -31,7 +31,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: requests-traffic
+  name: golden-traffic
 spec:
   args:
   - name: service
@@ -60,7 +60,7 @@ spec:
   - name: service
   - name: namespace
   metrics:
-  - name: request-latency
+  - name: golden-latency
     interval: 10s
     successCondition: len(result) == 0 || result[0] <=0.004
    # failureCondition: 
@@ -75,7 +75,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: saturation
+  name: golden-saturation
 spec:
   args:
   - name: service-name
