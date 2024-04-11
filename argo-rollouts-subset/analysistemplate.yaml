@@ -80,6 +80,7 @@ metadata:
 spec:
   args:
   - name: service-name
+  - name: namespace
   metrics:
   - name: saturation 
     interval: 10s
@@ -90,4 +91,4 @@ spec:
       prometheus:
         address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
-          sum(rate(container_cpu_usage_seconds_total{namespace="default", pod=~"istio-rollout-.*"}[1m])) 
+          sum(rate(container_cpu_usage_seconds_total{namespace="{{args.namespace}}", pod=~"istio-rollout-.*"}[1m])) 
