@@ -25,7 +25,8 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
-          limit: 
+          limits:
+            memory: 64Mi
             cpu: 50m
   strategy:
     canary:
