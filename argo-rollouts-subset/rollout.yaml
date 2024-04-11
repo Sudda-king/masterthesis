@@ -25,6 +25,8 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
+          limit: 
+            cpu: 50m
   strategy:
     canary:
       # analysis will be performed in background, while rollout is progressing through its steps
