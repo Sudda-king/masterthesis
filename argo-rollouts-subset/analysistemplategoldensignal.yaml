@@ -37,7 +37,7 @@ spec:
   - name: service
   - name: namespace
   metrics:
-  - name: requests-traffic
+  - name: golden-traffic
     interval: 10s
     successCondition: len(result) == 0 || result[0] <=100
     #successCondition: result[0] <= 0.95
@@ -54,7 +54,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: request-latency
+  name: golden-latency
 spec:
   args:
   - name: service
@@ -81,7 +81,7 @@ spec:
   - name: service-name
   - name: namespace
   metrics:
-  - name: saturation 
+  - name: golden-saturation 
     interval: 10s
     successCondition: result[0] <= 0.1
     failureCondition: result[0] > 0.1
