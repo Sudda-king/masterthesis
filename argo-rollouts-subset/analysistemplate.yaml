@@ -1,6 +1,6 @@
 #error
 apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
+kind: AnalysisRun
 metadata:
   name: istio-success-rate
 spec:
@@ -27,17 +27,7 @@ spec:
             reporter="source",
             destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[40s])
           )
----
-#TRAFFIC
-apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
-metadata:
-  name: requests-traffic
-spec:
-  args:
-  - name: service
-  - name: namespace
-  metrics:
+  
   - name: requests-traffic
     interval: 10s
     successCondition: len(result) == 0 || result[0] <=100
@@ -49,18 +39,7 @@ spec:
         address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
           sum(rate(istio_requests_total{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m]))
-
----
-# LATENCY
-apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
-metadata:
-  name: request-latency
-spec:
-  args:
-  - name: service
-  - name: namespace
-  metrics:
+ 
   - name: request-latency
     interval: 10s
     successCondition: len(result) == 0 || result[0] <=0.004
@@ -71,17 +50,7 @@ spec:
         address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
           histogram_quantile(0.90, sum(rate(istio_request_duration_milliseconds_bucket{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m])) by (le)) / 1000 
----
-#saturation
-apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
-metadata:
-  name: saturation
-spec:
-  args:
-  - name: service-name
-  - name: namespace
-  metrics:
+
   - name: saturation 
     interval: 10s
     successCondition: result[0] <= 0.1
@@ -92,3 +61,37 @@ spec:
         address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
           sum(rate(container_cpu_usage_seconds_total{namespace="{{args.namespace}}", pod=~"istio-rollout-.*"}[5m])) by (pod_name) 
+#---
+#TRAFFIC
+#apiVersion: argoproj.io/v1alpha1
+#kind: AnalysisTemplate
+#metadata:
+#  name: requests-traffic
+#spec:
+#  args:
+#  - name: service
+#  - name: namespace
+#  metrics:
+
+#---
+# LATENCY
+#apiVersion: argoproj.io/v1alpha1
+#kind: AnalysisTemplate
+#metadata:
+#  name: request-latency
+#spec:
+#  args:
+#  - name: service
+#  - name: namespace
+#  metrics:
+#---
+#saturation
+#apiVersion: argoproj.io/v1alpha1
+#kind: AnalysisTemplate
+#metadata:
+#  name: saturation
+#spec:
+#  args:
+#  - name: service-name
+#  - name: namespace
+#  metrics:
