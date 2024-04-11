@@ -1,6 +1,6 @@
 #error
 apiVersion: argoproj.io/v1alpha1
-kind: AnalysisRun
+kind: AnalysisTemplate
 metadata:
   name: istio-success-rate
 spec:
