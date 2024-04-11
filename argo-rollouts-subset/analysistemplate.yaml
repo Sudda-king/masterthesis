@@ -55,7 +55,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
   name: request-latency
-pec:
+spec:
   args:
   - name: service
   - name: namespace
