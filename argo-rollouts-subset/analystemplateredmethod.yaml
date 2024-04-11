@@ -1,1 +1,70 @@
-
+#rate
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: red-rate
+spec:
+  args:
+  - name: service
+  - name: namespace
+  metrics:
+  - name: requests-traffic
+    interval: 10s
+    successCondition: len(result) == 0 || result[0] <=110
+    #successCondition: result[0] <= 0.95
+    #failureCondition: result[0] > 0.95
+    #failureLimit: 3
+    provider:
+      prometheus:
+        address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
+        query:
+          sum(rate(istio_requests_total{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m]))
+---
+#error
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: red-success-rate
+spec:
+  args:
+  - name: service
+  - name: namespace
+  metrics:
+  - name: success-rate
+    initialDelay: 60s
+    interval: 20s
+    successCondition: len(result) == 0 || result[0] >= 0.9 
+    
+    provider:
+      prometheus:
+        address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
+        query: 
+          sum(irate(istio_requests_total{
+            destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local",
+            response_code!~"5.*"}[40s])
+          )
+          /
+          sum(irate(istio_requests_total{
+            destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[40s])
+          )
+---
+# duration
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: red-duration
+spec:
+  args:
+  - name: service
+  - name: namespace
+  metrics:
+  - name: request-latency
+    interval: 10s
+    successCondition: len(result) == 0 || result[0] <=0.004
+   # failureCondition: 
+   # failureLimit: 3
+    provider:
+      prometheus:
+        address:  http://10.152.183.211:9090 #http://prometheus.istio-system:9090
+        query:
+          histogram_quantile(0.90, sum(rate(istio_request_duration_milliseconds_bucket{destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local"}[1m])) by (le)) / 1000 
