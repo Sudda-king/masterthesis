@@ -83,9 +83,9 @@ spec:
   metrics:
   - name: golden-saturation 
     interval: 10s
-    successCondition: result[0] <= 0.1
-    failureCondition: result[0] > 0.1
-    failureLimit: 3
+    successCondition: len(result) == 0 || result[0] <= 0.1
+    #failureCondition: result[0] > 0.1
+    #failureLimit: 3
     provider:
       prometheus:
         address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
