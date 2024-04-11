@@ -91,4 +91,4 @@ spec:
       prometheus:
         address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
         query:
-          sum(rate(container_cpu_usage_seconds_total{namespace="{{args.namespace}}", pod=~"istio-rollout-.*"}[1m])) 
+          sum(rate(container_cpu_usage_seconds_total{namespace="{{args.namespace}}", pod=~"istio-rollout-.*"}[5m])) by (pod_name) 
