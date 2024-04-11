@@ -78,7 +78,7 @@ metadata:
   name: golden-saturation
 spec:
   args:
-  - name: service-name
+  - name: service
   - name: namespace
   metrics:
   - name: golden-saturation 
