@@ -9,5 +9,6 @@ resources:
 - virtualservice.yaml
 - rollout.yaml
 - destinationrule.yaml
+- errortest.yaml
 
 namespace: rollouts-demo-istio
