@@ -5,6 +5,7 @@ metadata:
 spec:
   template:
     spec:
+      restartPolicy: Never  # or OnFailure
       containers:
       - name: load-tester
         image: argoproj/load-tester:latest
