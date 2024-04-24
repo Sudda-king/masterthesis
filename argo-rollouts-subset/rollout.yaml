@@ -65,20 +65,20 @@ spec:
             stableSubsetName: stable  # required
       steps:
       - setWeight: 10
-      - pause: {duration: 5m}         # pause indefinitely, use promote command to move to next step. 
+      - pause: {duration: 30s}         # pause indefinitely, use promote command to move to next step. 
       - setWeight: 20
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 30
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 40
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 50
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 60
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 70
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 80
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
       - setWeight: 90
-      - pause: {duration: 5m}
+      - pause: {duration: 30s}
