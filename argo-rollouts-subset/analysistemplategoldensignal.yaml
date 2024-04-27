@@ -96,6 +96,7 @@ spec:
     provider:
       prometheus:
         address: http://10.152.183.211:9090 #http://prometheus.istio-system:9090
+        #"docker.io/sudda/httpfaultargo
         query:
-          rate(container_cpu_usage_seconds_total{image="docker.io/sudda/httpfaultargo",
+          rate(container_cpu_usage_seconds_total{image="docker.io/sudda/latencyargo",
           namespace="{{args.namespace}}", pod=~"istio-rollout-.*"}[1m])
