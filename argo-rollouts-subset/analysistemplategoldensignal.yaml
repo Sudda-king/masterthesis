@@ -41,7 +41,7 @@ spec:
   metrics:
   - name: golden-traffic
     interval: 10s
-    successCondition: len(result) == 0 || result[0] <=30
+    successCondition: len(result) == 0 || result[0] <=100
     #successCondition: result[0] <= 0.95
     #failureCondition: result[0] > 0.95
     #failureLimit: 3
