@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - namespace.yaml
-- analysistemplategoldensignal.yaml
+- analystemplateredmethod.yaml
 - gateway.yaml
 - service.yaml
 - virtualservice.yaml
