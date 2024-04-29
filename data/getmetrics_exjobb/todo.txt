@@ -1,0 +1,9 @@
+1. collect data from one run and store it in a CSV.
+    - seperate csv for each run. 
+    -seperate csv for each metric. 
+    
+2. do it 7 times
+
+3. average the csv files. 
+
+4. create plots from the csv. 
