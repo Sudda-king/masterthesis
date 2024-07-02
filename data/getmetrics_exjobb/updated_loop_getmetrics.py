@@ -56,61 +56,6 @@ def get_saturation( start, end, filename):
 
 # Define the list of time intervals
 time_intervals = [
-    #------ Normal experiment golden signals--------
-    #(datetime.datetime(2024, 4, 25, 14, 49, 57), datetime.datetime(2024, 4, 25, 14, 54, 27)),
-    #(datetime.datetime(2024, 4, 25, 16, 27,56), datetime.datetime(2024, 4, 25, 16, 32,26)),
-    #(datetime.datetime(2024, 4, 25, 16, 36,53), datetime.datetime(2024, 4, 25, 16, 41,23)),
-    #(datetime.datetime(2024, 4, 25, 17, 19, 14), datetime.datetime(2024, 4, 25, 17, 23,44)),
-    #(datetime.datetime(2024, 4, 26, 9, 45, 47), datetime.datetime(2024, 4, 26, 9, 50, 17)),
-    #(datetime.datetime(2024, 4, 26, 9, 55, 10), datetime.datetime(2024, 4, 26, 9, 59, 40)),
-    #(datetime.datetime(2024, 4, 26, 10, 28,26), datetime.datetime(2024, 4, 26, 10, 32,56))
-
-    #-----HTTPFAULT experiment golden signals
-    #(datetime.datetime(2024, 4, 27, 16, 12, 31), datetime.datetime(2024, 4, 27, 16, 15, 0)),
-    #(datetime.datetime(2024, 4, 27, 16, 16, 23), datetime.datetime(2024, 4, 27, 16, 18, 37)),
-    #(datetime.datetime(2024, 4, 27, 16, 21, 16), datetime.datetime(2024, 4, 27, 16, 23, 2)),
-    #(datetime.datetime(2024, 4, 27, 16, 39, 28), datetime.datetime(2024, 4, 27, 16, 41,42)),
-    #(datetime.datetime(2024, 4, 27, 16, 42, 40), datetime.datetime(2024, 4, 27, 16, 44, 50)),
-    #(datetime.datetime(2024, 4, 27, 16, 47, 2), datetime.datetime(2024, 4, 27, 16, 49, 29)),
-    #(datetime.datetime(2024, 4, 27, 16, 53,31), datetime.datetime(2024, 4, 27, 16, 55,37))
-
-    #----------- latency experiment golden. 
-    #(datetime.datetime(2024, 4, 27, 23, 15, 24), datetime.datetime(2024, 4, 27, 23, 19, 32)),
-    #(datetime.datetime(2024, 4, 27, 23, 20, 44), datetime.datetime(2024, 4, 27, 23, 24, 52)),
-    #(datetime.datetime(2024, 4, 27, 23, 25, 50), datetime.datetime(2024, 4, 27, 23, 29,56)),
-    #(datetime.datetime(2024, 4, 27, 23, 31, 42), datetime.datetime(2024, 4, 27, 23, 35, 18)),
-    #(datetime.datetime(2024, 4, 27, 23, 36, 30), datetime.datetime(2024, 4, 27, 23, 40, 38)),
-    #(datetime.datetime(2024, 4, 27, 23, 41,42), datetime.datetime(2024, 4, 27, 23, 45,50)),
-    #(datetime.datetime(2024, 4, 27, 23, 47, 26), datetime.datetime(2024, 4, 27, 23, 51, 34))
-
-    # http/latency fault
-    #(datetime.datetime(2024, 4, 28, 10, 41, 1), datetime.datetime(2024, 4, 28, 10, 43, 9)),
-    #(datetime.datetime(2024, 4, 28, 10, 45, 33), datetime.datetime(2024, 4, 28, 10, 47, 49)),
-    #(datetime.datetime(2024, 4, 28, 10, 48, 53), datetime.datetime(2024, 4, 28, 10, 50,29)),
-    #(datetime.datetime(2024, 4, 28, 10, 55, 25), datetime.datetime(2024, 4, 28, 10, 57, 33)),
-    #(datetime.datetime(2024, 4, 28, 10, 59, 49), datetime.datetime(2024, 4, 28, 11, 1, 49)),
-    #(datetime.datetime(2024, 4, 28, 11, 3, 17), datetime.datetime(2024, 4, 28, 11, 5, 41)),
-    #(datetime.datetime(2024, 4, 28, 11, 11, 33), datetime.datetime(2024, 4, 28, 11, 13, 11))
-    
-    # RED http fault experiment time
-    #(datetime.datetime(2024, 4, 29, 10, 51, 5), datetime.datetime(2024, 4, 29, 10, 53, 17)),
-    #(datetime.datetime(2024, 4, 29, 10, 54, 5), datetime.datetime(2024, 4, 29, 10, 56, 17)),
-    #(datetime.datetime(2024, 4, 29, 10, 57, 26), datetime.datetime(2024, 4, 29, 10, 59, 23)),
-    #(datetime.datetime(2024, 4, 29, 11, 0, 29), datetime.datetime(2024, 4, 29, 11, 2, 26)),
-    #(datetime.datetime(2024, 4, 29, 11, 3, 11), datetime.datetime(2024, 4, 29, 11, 5, 23)),
-    #(datetime.datetime(2024, 4, 29, 11, 6, 11), datetime.datetime(2024, 4, 29, 11, 8, 38)),
-    #(datetime.datetime(2024, 4, 29, 11, 13, 48), datetime.datetime(2024, 4, 29, 11, 16,17))
-
-    # RED LATENCY
-    #(datetime.datetime(2024, 4, 29, 11, 20, 20), datetime.datetime(2024, 4, 29, 11, 24, 32)),
-    #(datetime.datetime(2024, 4, 29, 11, 25, 38), datetime.datetime(2024, 4, 29, 11, 30, 5)),
-    #(datetime.datetime(2024, 4, 29, 11, 34, 12), datetime.datetime(2024, 4, 29, 11, 38, 26)),
-    #(datetime.datetime(2024, 4, 29, 11, 39, 8), datetime.datetime(2024, 4, 29, 11, 43, 20)),
-    #(datetime.datetime(2024, 4, 29, 11, 44, 2), datetime.datetime(2024, 4, 29, 11, 48,29)),
-    #(datetime.datetime(2024, 4, 29, 11, 49, 41), datetime.datetime(2024, 4, 29, 11, 53, 53)),
-    #(datetime.datetime(2024, 4, 29, 11, 55, 8), datetime.datetime(2024, 4, 29, 11, 59, 2))
-    
-    
     #RED LATENCY and HTTP
     (datetime.datetime(2024, 4, 29, 12, 20, 8), datetime.datetime(2024, 4, 29, 12, 22, 20)),
     (datetime.datetime(2024, 4, 29, 12, 29, 56), datetime.datetime(2024, 4, 29, 12, 31, 53)),
